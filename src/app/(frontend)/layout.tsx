@@ -1,7 +1,7 @@
 // import './styles.css'
-import '../globals.css'
-import { Header } from '../../../header/Header' // Adjust path as needed
-import { Footer } from '../../../footer/Footer' // Adjust path as needed
+import './globals.css'
+import { Header } from '@/header/Component' // Adjust path as needed
+import { Footer } from '@/Footer/Component' // Adjust path as needed
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
