@@ -20,28 +20,50 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   serverURL: getServerSideURL(),
   admin: {
-    user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    user: Users.slug,
+    livePreview: {
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
+    },
   },
-  collections: [Pages, Users, Media],
   editor: defaultLexical,
-  secret: process.env.PAYLOAD_SECRET || '',
-  cors: [getServerSideURL()].filter(Boolean),
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  sharp,
+  collections: [Pages, Users, Media],
+  cors: [getServerSideURL()].filter(Boolean),
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
   ],
+  secret: process.env.PAYLOAD_SECRET || '',
+  sharp,
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
   jobs: {
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {

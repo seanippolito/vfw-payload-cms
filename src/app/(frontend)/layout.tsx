@@ -5,7 +5,7 @@ import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
-// import { AdminBar } from '@/components/AdminBar'
+import { AdminBar } from '@/components/AdminBar'
 // import { Footer } from '@/Footer/Component'
 // import { Header } from '@/Header/Component'
 // import { Providers } from '@/providers'
@@ -28,11 +28,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </head>
     <body>
     {/*<Providers>*/}
-    {/*  <AdminBar*/}
-    {/*    adminBarProps={{*/}
-    {/*      preview: isEnabled,*/}
-    {/*    }}*/}
-    {/*  />*/}
+      <AdminBar
+        adminBarProps={{
+          preview: isEnabled,
+        }}
+      />
 
       {/*<Header />*/}
       {children}

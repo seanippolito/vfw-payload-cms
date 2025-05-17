@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone } from '@/access/anyone'
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { Content } from '@/blocks/Content/config'
@@ -21,10 +20,10 @@ import {
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
   access: {
-    create: anyone,
-    delete: anyone,
-    read: anyone,
-    update: anyone,
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   defaultPopulate: {
     title: true,

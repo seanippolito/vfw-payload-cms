@@ -8,7 +8,7 @@ export const getServerSideURL = () => {
   }
 
   if (!url) {
-    url = 'http://localhost:3001'
+    url = 'http://localhost:3000'
   }
 
   return url
@@ -26,6 +26,8 @@ export const getClientSideURL = () => {
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
+
+  console.log(process.env.NEXT_PUBLIC_SERVER_URL || '')
 
   return process.env.NEXT_PUBLIC_SERVER_URL || ''
 }
