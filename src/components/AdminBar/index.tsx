@@ -8,11 +8,7 @@ import { PayloadAdminBar } from '@payloadcms/admin-bar'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import './index.scss'
-
 import { getClientSideURL } from '@/utilities/getURL'
-
-const baseClass = 'admin-bar'
 
 const collectionLabels = {
   pages: {
@@ -29,7 +25,7 @@ const collectionLabels = {
   },
 }
 
-const Title: React.FC = () => <span>Dashboard</span>
+const Title: React.FC = () => <span className="font-bold text-green-500">SoSAi</span>
 
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
@@ -48,7 +44,7 @@ export const AdminBar: React.FC<{
 
   return (
     <div
-      className={cn(baseClass, 'py-2 bg-black text-white', {
+      className={cn('py-2', {
         block: show,
         hidden: !show,
       })}
@@ -56,11 +52,10 @@ export const AdminBar: React.FC<{
       <div className="container">
         <PayloadAdminBar
           {...adminBarProps}
-          className="py-2 text-white"
           classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
+            controls: 'font-medium text-blue-500',
+            user: 'font-bold text-blue-500!', // Override ! is needed because the text color is not taking effect
+            logout: 'font-bold text-blue-500!',
           }}
           cmsURL={getClientSideURL()}
           collectionSlug={collection}
@@ -77,10 +72,8 @@ export const AdminBar: React.FC<{
             })
           }}
           style={{
-            backgroundColor: 'transparent',
-            padding: 0,
-            position: 'relative',
-            zIndex: 'unset',
+            position: 'fixed',
+            zIndex: '1000',
           }}
         />
       </div>
