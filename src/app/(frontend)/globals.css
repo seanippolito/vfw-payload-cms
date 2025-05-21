@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:where([data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light] *));
+@custom-variant sexy (&:where([data-theme=sexy] *));
+
+
+@theme {
+    --font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);
+    --font-mono: var(--font-geist-mono, 'Courier New', monospace);
+
+    --font-script: Great Vibes, cursive;
+
+    --color-foreground: var(--theme-color-foreground);
+    --color-background: var(--theme-color-background);
+    --color-sexy-red: var(--theme-color-sexy-red);
+
+    --color-card: 240 5% 96%;
+    --color-card-foreground: 222.2 84% 4.9%;
+
+    --color-popover: 0 0% 100%;
+    --color-popover-foreground: 222.2 84% 4.9%;
+
+    --color-primary: 222.2 47.4% 11.2%;
+    --color-primary-foreground: 210 40% 98%;
+
+    --color-secondary: 210 40% 96.1%;
+    --color-secondary-foreground: 222.2 47.4% 11.2%;
+
+    --color-muted: 210 40% 96.1%;
+    --color-muted-foreground: 215.4 16.3% 46.9%;
+
+    --color-accent: 210 40% 96.1%;
+    --color-accent-foreground: 222.2 47.4% 11.2%;
+
+    --color-destructive: 0 84.2% 60.2%;
+    --color-destructive-foreground: 210 40% 98%;
+
+    --color-border: 240 6% 80%;
+    --color-input: 214.3 31.8% 91.4%;
+    --color-ring: 222.2 84% 4.9%;
+
+    --border-radius-lg: 0.2rem;
+    --border-radius-md: 0.2rem - 2px;
+    --border-radius-sm: 0.2rem - 4px;
+
+
+    --color-success: 196 52% 74%;
+    --color-warning: 34 89% 85%;
+    --color-error: 10 100% 86%;
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    [data-theme="light"] {
+
+        --theme-color-foreground: oklch(0.892 0.054 82.855);
+        --theme-color-background: oklch(0.285 0.113 28.456);
+        --theme-color-sexy-red: oklch(0.391 0.041 100.549);
+    }
+
+    [data-theme="dark"] {
+        --theme-color-foreground: oklch(0.255 0.104 29.234);
+        --theme-color-background: oklch(0.75 0.237 139.9);
+        --theme-color-sexy-red: oklch(0.646 0.145 240.785);
+    }
+
+    [data-theme="sexy"] {
+        --theme-color-foreground: oklch(0.475 0.175 259.558);
+        --theme-color-background: oklch(0.527 0.231 330.507);
+        --theme-color-sexy-red: oklch(0.801 0.233 135.997);
+    }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+
+body {
+    color: var(--color-foreground);
+    background: var(--color-background);
+    /*font-family: var(--font-script);*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+}
