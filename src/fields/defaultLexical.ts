@@ -10,7 +10,8 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 export const defaultLexical = lexicalEditor({
-  features: [
+  features: ({ defaultFeatures, rootFeatures }) =>[
+    ...defaultFeatures,
     ParagraphFeature(),
     UnderlineFeature(),
     BoldFeature(),

@@ -53,23 +53,31 @@
 }
 
 @layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
     [data-theme="light"] {
 
         --theme-color-foreground: oklch(0.892 0.054 82.855);
         --theme-color-background: oklch(0.285 0.113 28.456);
-        --theme-color-sexy-red: oklch(0.57 0.225 28.379);
+        --theme-color-sexy-red: oklch(0.391 0.041 100.549);
     }
 
     [data-theme="dark"] {
-        --theme-color-foreground: oklch(0.94 0.11 115.03);
-        --theme-color-background: oklch(0.4 0.7 88.34);
-        --theme-color-sexy-red: oklch(0.57 0.225 28.379);
+        --theme-color-foreground: oklch(0.255 0.104 29.234);
+        --theme-color-background: oklch(0.75 0.237 139.9);
+        --theme-color-sexy-red: oklch(0.646 0.145 240.785);
     }
 
     [data-theme="sexy"] {
-        --theme-color-foreground: oklch(0.94 0.11 115.03);
-        --theme-color-background: oklch(0.4 0.7 88.34);
-        --theme-color-sexy-red: oklch(0.57 0.225 28.379);
+        --theme-color-foreground: oklch(0.475 0.175 259.558);
+        --theme-color-background: oklch(0.527 0.231 330.507);
+        --theme-color-sexy-red: oklch(0.801 0.233 135.997);
     }
 }
 
@@ -81,27 +89,10 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
-/*@layer base {*/
-/*    *,*/
-/*    ::file-selector-button {*/
-/*        border-color: var(--color-gray-200, currentColor);*/
-/*    }*/
-/*}*/
-
-/*:root {*/
-/*    --background: #ffffff;*/
-/*    --foreground: #171717;*/
-/*}*/
-
-/*@media (prefers-color-scheme: dark) {*/
-/*    :root {*/
-/*        --background: #0a0a0a;*/
-/*        --foreground: #ededed;*/
-/*    }*/
-/*}*/
 
 body {
     color: var(--color-foreground);
     background: var(--color-background);
+    /*font-family: var(--font-script);*/
     /*font-family: Arial, Helvetica, sans-serif;*/
 }

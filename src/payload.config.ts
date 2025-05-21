@@ -5,11 +5,13 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
-
+import { DefaultTemplate } from '@payloadcms/next/templates'
 
 import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Header } from './Header/config'
+import { Footer } from './Footer/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -24,6 +26,28 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     user: Users.slug,
+    components: {
+      views: {
+        myCustomView: {
+          Component: '/components/Actions',
+          path: '/custom',
+        },
+      },
+      actions: ['/components/Actions'],
+      header: ['/components/Actions'],
+      beforeNavLinks: ['/components/AfterNavLinks', '/components/Actions'],
+      afterNavLinks: ['/components/AfterNavLinks', '/components/Actions'],
+      beforeDashboard: ['/components/AfterNavLinks', '/components/Actions'],
+      afterDashboard: ['/components/AfterNavLinks', '/components/Actions'],
+      graphics: {
+        Icon: '/components/Actions',
+        Logo: '/components/Actions',
+      },
+      logout: {
+        Button: '/components/Actions',
+      },
+      // Nav: '/components/Nav',
+    },
     livePreview: {
       breakpoints: [
         {
@@ -47,6 +71,7 @@ export default buildConfig({
       ],
     },
   },
+  maxDepth: 0,
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
@@ -55,6 +80,7 @@ export default buildConfig({
   }),
   collections: [Pages, Users, Media],
   cors: [getServerSideURL()].filter(Boolean),
+  globals: [Header, Footer],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

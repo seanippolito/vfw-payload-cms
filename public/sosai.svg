@@ -1,0 +1,18 @@
+<svg width="193" height="34" viewBox="0 0 193 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00F0FF" />
+            <stop offset="100%" stop-color="#00FFAA" />
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#glow)">
+        <text x="0" y="26" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="url(#neonGradient)" letter-spacing="6">SȯSAI</text>
+    </g>
+</svg>
