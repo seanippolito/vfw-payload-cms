@@ -6,16 +6,18 @@ import {
   ParagraphFeature,
   lexicalEditor,
   UnderlineFeature,
+  BlocksFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
+import { Banner } from '@/blocks/Banner/config'
 
 export const defaultLexical = lexicalEditor({
-  features: ({ defaultFeatures, rootFeatures }) =>[
-    ...defaultFeatures,
+  features: [
     ParagraphFeature(),
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
+    BlocksFeature({ blocks: [Banner] }),
     LinkFeature({
       enabledCollections: ['pages'],
       fields: ({ defaultFields }) => {

@@ -5,7 +5,6 @@ import NextImage from 'next/image'
 export default function MyCustomAction() {
 
   return (
-    /* eslint-disable @next/next/no-img-element */
     <NextImage
       alt="SoSAi Logo"
       width={193}

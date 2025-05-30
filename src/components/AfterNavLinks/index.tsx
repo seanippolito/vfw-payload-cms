@@ -1,3 +1,5 @@
+'use client'
+
 export default function MyAfterNavLinksComponent() {
-  return <p>This is a custom component injected after the Nav links.</p>
+  return <span className="w-40 bg-blue-500">HELLOOOOO</span>
 }
