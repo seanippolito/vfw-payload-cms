@@ -20,6 +20,15 @@ const nextConfig = {
       }),
     ],
   },
+  // Needed do to an issue with postgres adapter
+  // https://github.com/vercel/next.js/discussions/50177
+  webpack: (config, { webpack }) => {
+    config.plugins.push(new webpack.IgnorePlugin({
+      resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
+    }))
+
+    return config
+  },
   reactStrictMode: true,
   redirects,
 }
