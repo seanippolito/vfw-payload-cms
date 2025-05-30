@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
@@ -48,9 +49,23 @@ export const Pages: CollectionConfig<'pages'> = {
         collection: 'pages',
         req,
       }),
-    useAsTitle: 'title',
+    useAsTitle: 'label',
   },
   fields: [
+    {
+      name: 'adminLabel',
+      type: 'ui',
+      admin : {
+        components: {
+          Field: '/components/AdminLabel'
+        }
+      }
+    },
+    {
+      name: 'label',
+      label: 'Label',
+      type: 'text',
+    },
     {
       name: 'title',
       type: 'text',
@@ -68,7 +83,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [Content],
+              blocks: [CallToAction, Content],
               required: true,
               admin: {
                 initCollapsed: true,

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, CollectionSlug } from 'payload'
 
 import { authenticated } from '@/access/authenticated'
 
@@ -20,6 +20,34 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
+    },
+    {
+      name: 'roles',
+      saveToJWT: true,
+      type: 'select',
+      hasMany: true,
+      defaultValue: ['editor'],
+      options: [
+        {
+          label: 'Editor',
+          value: 'editor',
+        },
+        {
+          label: 'Admin',
+          value: 'admin',
+        },
+      ]
+    },
+    {
+      name: 'sites',
+      saveToJWT: true,
+      type: 'relationship',
+      relationTo: 'sites' as CollectionSlug,
+      hasMany: true,
+      admin: {
+        condition: ({ roles }) => roles && !roles.includes('admin'),
+        description: 'This field sets which sites that this user has access to.'
+      }
     },
   ],
   timestamps: true,
