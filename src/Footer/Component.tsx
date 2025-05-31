@@ -12,6 +12,9 @@ export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
 
   const navItems = footerData?.navItems || []
+  const postNumber = footerData?.postNumber || 5985
+  const address = footerData?.address || '12345 Somewhere Road'
+
 
   return (
     <footer className="h-100 mt-auto bg-black dark:bg-card text-white">
@@ -19,6 +22,11 @@ export async function Footer() {
         <Link className="m-8 flex items-center" href="/">
           <Logo />
         </Link>
+
+        <div>
+          {postNumber && <p className="m-8">{postNumber}</p>}
+          {address && <p className="m-8">{address}</p>}
+        </div>
 
         <div className="m-8 flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
           <ThemeSelector />

@@ -10,6 +10,14 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
+      name: 'postNumber',
+      type: 'text',
+    },
+    {
+      name: 'address',
+      type: 'text',
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [

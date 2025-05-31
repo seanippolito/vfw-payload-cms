@@ -1372,6 +1372,8 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  postNumber?: string | null;
+  address?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1381,6 +1383,8 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  postNumber?: string | null;
+  address?: string | null;
   navItems?:
     | {
         link: {
@@ -1423,6 +1427,8 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  postNumber?: T;
+  address?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1432,6 +1438,8 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  postNumber?: T;
+  address?: T;
   navItems?:
     | T
     | {

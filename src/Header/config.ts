@@ -2,6 +2,12 @@ import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateHeader } from './hooks/revalidateHeader'
+import {
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -24,6 +30,14 @@ export const Header: GlobalConfig = {
           RowLabel: '@/Header/RowLabel#RowLabel',
         },
       },
+    },
+    {
+      name: 'postNumber',
+      type: 'text',
+    },
+    {
+      name: 'address',
+      type: 'text',
     },
   ],
   hooks: {
