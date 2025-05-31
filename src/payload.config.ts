@@ -33,7 +33,7 @@ export default buildConfig({
       // header: ['/components/Actions'],
       // beforeNavLinks: ['/components/AfterNavLinks', '/components/Actions'],
       // afterNavLinks: ['/components/AfterNavLinks', '/components/Actions'],
-      // beforeDashboard: ['/components/AfterNavLinks', '/components/Actions'],
+      beforeDashboard: ['/components/BeforeDashboard', '/components/Actions'],
       afterDashboard: ['/components/AfterNavLinks', '/components/Actions'],
       // graphics: {
       //   Icon: '/components/Actions',

@@ -1,10 +1,23 @@
 ### Phase 1 Development
 
 1. Seed the data from the created collections and generate migration scripts
-   - Pages
-   - Users
-   - Media
-   - Sites
+  - When seeding data the existing data is wiped form the Database
+  - Pages 
+    - The data was seeded for the home page, will seed additional pages for VFW when created
+    - Copying the API data after creating the page worked best, needed to remove some fields that related to createdAt dates and references to foreign keys, used AI to refactor and remove quotes from keys with great success
+    - Need to figure out how to seed data for multiple tenants? Phase 10 perhaps? Remove the safeguard to seed a clean database and just append new data for new tenants
+  - Users
+    - This was easy to seed users in the DB, just follow the config or the API
+  - Media
+    - Seeding the media was a bit tricky, I opted to see data in the github repo like the example as oppose to the file system
+    - sizes seem to not work for the jpeg image i tested as they were not created. They are created for the seeded data I copies which was a different format
+    - format that seems to work best is .webp, will need to test with that in the future
+  - Header
+    - Header data needs to be seeded with links to pages
+  - Footer
+    - Footer data needs to also be seeded with links and info
+  - Sites
+    - I opted not to seed this data at this time since it may be replaced with a plugin
    
 2. Update to the latest Payload Version
 3. Implement Posts collection and seed data
