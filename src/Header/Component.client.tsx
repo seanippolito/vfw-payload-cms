@@ -8,6 +8,7 @@ import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
+import RichText from '@/components/RichText'
 
 interface HeaderClientProps {
   data: Header
@@ -29,12 +30,22 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
+  const postNumber = data?.postNumber ?? 5985;
+  const address = data?.address;
+  // @ts-ignore TODO some reason ts does not like nested children from lexical editor? need to investigate later
+  const isAddress = address?.root?.children[0]?.children[0]?.text != undefined;
   return (
     <header className="relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
       <div className="py-8 px-4 flex justify-between">
-        <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
-        </Link>
+        <div className="flex content-end items-center gap-4">
+          <Link href="/">
+            <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          </Link>
+          <div>
+            <h1 className="text-5xl">VFW Post {postNumber}</h1>
+            {isAddress ? <RichText className="font-script mb-6" data={address} enableGutter={false} /> : <h1 className="text-3xl">Pacific Beach, San Diego, California</h1>}
+          </div>
+        </div>
         <HeaderNav data={data} />
       </div>
     </header>

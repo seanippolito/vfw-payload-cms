@@ -16,14 +16,14 @@ export const Logo = (props: Props) => {
 
   return (
     <NextImage
-      alt="SoSAi Logo"
-      width={193}
-      height={34}
+      alt="VFW Post 5985"
+      width={150}
+      height={150}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-37.5 w-full h-[34px]', className)}
-      src="sosai.svg"
+      className={clsx(className)}
+      src="CrossOfMalta_vector.svg"
     />
   )
 }

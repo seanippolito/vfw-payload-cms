@@ -1372,6 +1372,22 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  postNumber?: string | null;
+  address?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1423,6 +1439,8 @@ export interface HeaderSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  postNumber?: T;
+  address?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
