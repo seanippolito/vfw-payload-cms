@@ -20,8 +20,16 @@
     - I opted not to seed this data at this time since it may be replaced with a plugin
    
 2. Update to the latest Payload Version
+   - I ran pnpm update and nothing seemed to break, did little testing, going to just continue as build is fine
+
 3. Implement Posts collection and seed data
+   - The posts collection touches a few things, not sure I want to bring in every feature here. Is it needed for the VFW?
+   - Integrated very basic frontend for posts
+   - Integrated a few more components and a post hero
+   - Still need to seed posts data
 4. Integrate UI for Posts collection config
+   - Completed a basic UI/UX experience for this
+   - much more room to expand on what a post is
 5. Update Header UI/UX to match VFW site
 6. Update Footer UI/UX
 7. Footer should include links to social media, spotify, and such

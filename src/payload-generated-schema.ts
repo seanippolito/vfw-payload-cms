@@ -6,6 +6,7 @@
  * and re-run `payload generate:db-schema` to regenerate this file.
  */
 
+import type {} from '@payloadcms/db-postgres'
 import {
   pgTable,
   index,
@@ -88,6 +89,7 @@ export const enum__pages_v_version_status = pgEnum('enum__pages_v_version_status
   'draft',
   'published',
 ])
+export const enum_users_roles = pgEnum('enum_users_roles', ['editor', 'admin'])
 export const enum_redirects_to_type = pgEnum('enum_redirects_to_type', ['reference', 'custom'])
 export const enum_forms_confirmation_type = pgEnum('enum_forms_confirmation_type', [
   'message',
@@ -235,6 +237,7 @@ export const pages = pgTable(
   'pages',
   {
     id: serial('id').primaryKey(),
+    label: varchar('label'),
     title: varchar('title'),
     hero_type: enum_pages_hero_type('hero_type').default('highImpact'),
     hero_richText: jsonb('hero_rich_text'),
@@ -424,6 +427,7 @@ export const _pages_v = pgTable(
     parent: integer('parent_id').references(() => pages.id, {
       onDelete: 'set null',
     }),
+    version_label: varchar('version_label'),
     version_title: varchar('version_title'),
     version_hero_type: enum__pages_v_version_hero_type('version_hero_type').default('highImpact'),
     version_hero_richText: jsonb('version_hero_rich_text'),
@@ -516,6 +520,25 @@ export const _pages_v_rels = pgTable(
   }),
 )
 
+export const users_roles = pgTable(
+  'users_roles',
+  {
+    order: integer('order').notNull(),
+    parent: integer('parent_id').notNull(),
+    value: enum_users_roles('value'),
+    id: serial('id').primaryKey(),
+  },
+  (columns) => ({
+    orderIdx: index('users_roles_order_idx').on(columns.order),
+    parentIdx: index('users_roles_parent_idx').on(columns.parent),
+    parentFk: foreignKey({
+      columns: [columns['parent']],
+      foreignColumns: [users.id],
+      name: 'users_roles_parent_fk',
+    }).onDelete('cascade'),
+  }),
+)
+
 export const users = pgTable(
   'users',
   {
@@ -543,6 +566,33 @@ export const users = pgTable(
     users_updated_at_idx: index('users_updated_at_idx').on(columns.updatedAt),
     users_created_at_idx: index('users_created_at_idx').on(columns.createdAt),
     users_email_idx: uniqueIndex('users_email_idx').on(columns.email),
+  }),
+)
+
+export const users_rels = pgTable(
+  'users_rels',
+  {
+    id: serial('id').primaryKey(),
+    order: integer('order'),
+    parent: integer('parent_id').notNull(),
+    path: varchar('path').notNull(),
+    sitesID: integer('sites_id'),
+  },
+  (columns) => ({
+    order: index('users_rels_order_idx').on(columns.order),
+    parentIdx: index('users_rels_parent_idx').on(columns.parent),
+    pathIdx: index('users_rels_path_idx').on(columns.path),
+    users_rels_sites_id_idx: index('users_rels_sites_id_idx').on(columns.sitesID),
+    parentFk: foreignKey({
+      columns: [columns['parent']],
+      foreignColumns: [users.id],
+      name: 'users_rels_parent_fk',
+    }).onDelete('cascade'),
+    sitesIdFk: foreignKey({
+      columns: [columns['sitesID']],
+      foreignColumns: [sites.id],
+      name: 'users_rels_sites_fk',
+    }).onDelete('cascade'),
   }),
 )
 
@@ -635,6 +685,24 @@ export const media = pgTable(
     media_sizes_og_sizes_og_filename_idx: index('media_sizes_og_sizes_og_filename_idx').on(
       columns.sizes_og_filename,
     ),
+  }),
+)
+
+export const sites = pgTable(
+  'sites',
+  {
+    id: serial('id').primaryKey(),
+    title: varchar('title').notNull(),
+    updatedAt: timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 3 })
+      .defaultNow()
+      .notNull(),
+    createdAt: timestamp('created_at', { mode: 'string', withTimezone: true, precision: 3 })
+      .defaultNow()
+      .notNull(),
+  },
+  (columns) => ({
+    sites_updated_at_idx: index('sites_updated_at_idx').on(columns.updatedAt),
+    sites_created_at_idx: index('sites_created_at_idx').on(columns.createdAt),
   }),
 )
 
@@ -945,7 +1013,7 @@ export const forms_emails = pgTable(
     bcc: varchar('bcc'),
     replyTo: varchar('reply_to'),
     emailFrom: varchar('email_from'),
-    subject: varchar('subject').notNull().default("You''ve received a new message."),
+    subject: varchar('subject').notNull().default("You've received a new message."),
     message: jsonb('message'),
   },
   (columns) => ({
@@ -1126,6 +1194,7 @@ export const payload_locked_documents_rels = pgTable(
     pagesID: integer('pages_id'),
     usersID: integer('users_id'),
     mediaID: integer('media_id'),
+    sitesID: integer('sites_id'),
     redirectsID: integer('redirects_id'),
     formsID: integer('forms_id'),
     'form-submissionsID': integer('form_submissions_id'),
@@ -1144,6 +1213,9 @@ export const payload_locked_documents_rels = pgTable(
     payload_locked_documents_rels_media_id_idx: index(
       'payload_locked_documents_rels_media_id_idx',
     ).on(columns.mediaID),
+    payload_locked_documents_rels_sites_id_idx: index(
+      'payload_locked_documents_rels_sites_id_idx',
+    ).on(columns.sitesID),
     payload_locked_documents_rels_redirects_id_idx: index(
       'payload_locked_documents_rels_redirects_id_idx',
     ).on(columns.redirectsID),
@@ -1175,6 +1247,11 @@ export const payload_locked_documents_rels = pgTable(
       columns: [columns['mediaID']],
       foreignColumns: [media.id],
       name: 'payload_locked_documents_rels_media_fk',
+    }).onDelete('cascade'),
+    sitesIdFk: foreignKey({
+      columns: [columns['sitesID']],
+      foreignColumns: [sites.id],
+      name: 'payload_locked_documents_rels_sites_fk',
     }).onDelete('cascade'),
     redirectsIdFk: foreignKey({
       columns: [columns['redirectsID']],
@@ -1559,8 +1636,35 @@ export const relations__pages_v = relations(_pages_v, ({ one, many }) => ({
     relationName: '_rels',
   }),
 }))
-export const relations_users = relations(users, () => ({}))
+export const relations_users_roles = relations(users_roles, ({ one }) => ({
+  parent: one(users, {
+    fields: [users_roles.parent],
+    references: [users.id],
+    relationName: 'roles',
+  }),
+}))
+export const relations_users_rels = relations(users_rels, ({ one }) => ({
+  parent: one(users, {
+    fields: [users_rels.parent],
+    references: [users.id],
+    relationName: '_rels',
+  }),
+  sitesID: one(sites, {
+    fields: [users_rels.sitesID],
+    references: [sites.id],
+    relationName: 'sites',
+  }),
+}))
+export const relations_users = relations(users, ({ many }) => ({
+  roles: many(users_roles, {
+    relationName: 'roles',
+  }),
+  _rels: many(users_rels, {
+    relationName: '_rels',
+  }),
+}))
 export const relations_media = relations(media, () => ({}))
+export const relations_sites = relations(sites, () => ({}))
 export const relations_redirects_rels = relations(redirects_rels, ({ one }) => ({
   parent: one(redirects, {
     fields: [redirects_rels.parent],
@@ -1748,6 +1852,11 @@ export const relations_payload_locked_documents_rels = relations(
       references: [media.id],
       relationName: 'media',
     }),
+    sitesID: one(sites, {
+      fields: [payload_locked_documents_rels.sitesID],
+      references: [sites.id],
+      relationName: 'sites',
+    }),
     redirectsID: one(redirects, {
       fields: [payload_locked_documents_rels.redirectsID],
       references: [redirects.id],
@@ -1873,6 +1982,7 @@ type DatabaseSchema = {
   enum__pages_v_blocks_content_columns_link_appearance: typeof enum__pages_v_blocks_content_columns_link_appearance
   enum__pages_v_version_hero_type: typeof enum__pages_v_version_hero_type
   enum__pages_v_version_status: typeof enum__pages_v_version_status
+  enum_users_roles: typeof enum_users_roles
   enum_redirects_to_type: typeof enum_redirects_to_type
   enum_forms_confirmation_type: typeof enum_forms_confirmation_type
   enum_payload_jobs_log_task_slug: typeof enum_payload_jobs_log_task_slug
@@ -1894,8 +2004,11 @@ type DatabaseSchema = {
   _pages_v_blocks_content: typeof _pages_v_blocks_content
   _pages_v: typeof _pages_v
   _pages_v_rels: typeof _pages_v_rels
+  users_roles: typeof users_roles
   users: typeof users
+  users_rels: typeof users_rels
   media: typeof media
+  sites: typeof sites
   redirects: typeof redirects
   redirects_rels: typeof redirects_rels
   forms_blocks_checkbox: typeof forms_blocks_checkbox
@@ -1939,8 +2052,11 @@ type DatabaseSchema = {
   relations__pages_v_blocks_content: typeof relations__pages_v_blocks_content
   relations__pages_v_rels: typeof relations__pages_v_rels
   relations__pages_v: typeof relations__pages_v
+  relations_users_roles: typeof relations_users_roles
+  relations_users_rels: typeof relations_users_rels
   relations_users: typeof relations_users
   relations_media: typeof relations_media
+  relations_sites: typeof relations_sites
   relations_redirects_rels: typeof relations_redirects_rels
   relations_redirects: typeof relations_redirects
   relations_forms_blocks_checkbox: typeof relations_forms_blocks_checkbox
@@ -1972,7 +2088,7 @@ type DatabaseSchema = {
   relations_footer: typeof relations_footer
 }
 
-declare module '@payloadcms/db-postgres/drizzle' {
+declare module '@payloadcms/db-postgres' {
   export interface GeneratedDatabaseSchema {
     schema: DatabaseSchema
   }
