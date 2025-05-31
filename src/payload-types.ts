@@ -1373,21 +1373,7 @@ export interface Header {
       }[]
     | null;
   postNumber?: string | null;
-  address?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  address?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1397,6 +1383,8 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  postNumber?: string | null;
+  address?: string | null;
   navItems?:
     | {
         link: {
@@ -1450,6 +1438,8 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  postNumber?: T;
+  address?: T;
   navItems?:
     | T
     | {

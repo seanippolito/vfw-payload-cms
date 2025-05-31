@@ -31,7 +31,12 @@
    - Completed a basic UI/UX experience for this
    - much more room to expand on what a post is
 5. Update Header UI/UX to match VFW site
+   - Pretty much done, need to add pages and search bar
+   - Header is data saved in the Database
+   - I used a Rich text editor for the address but I think it would be best to store the Logo and Address in a collection that can be reused in the header
+   - May incorporate Logo picture into DB as well
 6. Update Footer UI/UX
+    - Implemented basic UI for footer to match current website, need to determine how to handle addresses
 7. Footer should include links to social media, spotify, and such
 8. Integrate Search Bar in header
 9. Update pages collection to include desired features

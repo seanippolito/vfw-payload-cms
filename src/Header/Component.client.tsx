@@ -31,9 +31,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   const postNumber = data?.postNumber ?? 5985;
-  const address = data?.address;
-  // @ts-ignore TODO some reason ts does not like nested children from lexical editor? need to investigate later
-  const isAddress = address?.root?.children[0]?.children[0]?.text != undefined;
+  const address = data?.address ?? 'Pacific Beach, San Diego, California';
+
   return (
     <header className="relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
       <div className="py-8 px-4 flex justify-between">
@@ -43,7 +42,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           </Link>
           <div>
             <h1 className="text-5xl">VFW Post {postNumber}</h1>
-            {isAddress ? <RichText className="font-script mb-6" data={address} enableGutter={false} /> : <h1 className="text-3xl">Pacific Beach, San Diego, California</h1>}
+            <h1 className="text-3xl">{address}</h1>
           </div>
         </div>
         <HeaderNav data={data} />
