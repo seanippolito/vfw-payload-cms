@@ -10,6 +10,9 @@ import {
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
 import { Banner } from '@/blocks/Banner/config'
+import { YouTube } from '@/blocks/YouTube/config'
+import { Instagram } from '@/blocks/Instagram/config'
+import { Spotify } from '@/blocks/Spotfiy/config'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -17,13 +20,13 @@ export const defaultLexical = lexicalEditor({
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
-    BlocksFeature({ blocks: [Banner] }),
+    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify] }),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {
         const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-          if ('name' in field && field.name === 'url') return false
-          return true
+          return !('name' in field && field.name === 'url');
+
         })
 
         return [

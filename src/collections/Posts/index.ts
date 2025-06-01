@@ -26,6 +26,9 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { YouTube } from '@/blocks/YouTube/config'
+import { Instagram } from '@/blocks/Instagram/config'
+import { Spotify } from '@/blocks/Spotfiy/config'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -51,13 +54,11 @@ export const Posts: CollectionConfig<'posts'> = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
-        const path = generatePreviewPath({
+        return generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'posts',
           req,
         })
-
-        return path
       },
     },
     preview: (data, { req }) =>
@@ -92,7 +93,7 @@ export const Posts: CollectionConfig<'posts'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner] }),
+                    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

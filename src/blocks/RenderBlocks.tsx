@@ -5,12 +5,18 @@ import type { Page } from '@/payload-types'
 // import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
+import { InstagramBlock } from '@/blocks/Instagram/Component'
+import { YouTubeBlock } from '@/blocks/YouTube/Component'
+import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
 // import { FormBlock } from '@/blocks/Form/Component'
 // import { MediaBlock } from '@/blocks/MediaBlock/Component'
 
 const blockComponents = {
   content: ContentBlock,
-  cta: CallToActionBlock
+  cta: CallToActionBlock,
+  instagram: InstagramBlock,
+  youtube: YouTubeBlock,
+  spotify: SpotifyBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -4,6 +4,9 @@ import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { CallToAction } from '@/blocks/CallToAction/config'
 import { Content } from '@/blocks/Content/config'
+import { Instagram } from '@/blocks/Instagram/config'
+import { YouTube } from '@/blocks/YouTube/config'
+import { Spotify } from '@/blocks/Spotfiy/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
@@ -34,13 +37,11 @@ export const Pages: CollectionConfig<'pages'> = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
-        const path = generatePreviewPath({
+        return generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'pages',
           req,
         })
-
-        return path
       },
     },
     preview: (data, { req }) =>
@@ -55,11 +56,11 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       name: 'adminLabel',
       type: 'ui',
-      admin : {
+      admin: {
         components: {
-          Field: '/components/AdminLabel'
-        }
-      }
+          Field: '/components/AdminLabel',
+        },
+      },
     },
     {
       name: 'label',
@@ -83,7 +84,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content],
+              blocks: [CallToAction, Content, Instagram, YouTube, Spotify],
               required: true,
               admin: {
                 initCollapsed: true,
