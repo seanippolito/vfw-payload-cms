@@ -15,16 +15,22 @@ import {
 
 import type {
   BannerBlock as BannerBlockProps,
+  YouTubeBlock as YouTubeBlockProps,
+  InstagramBlock as InstagramBlockProps,
+  SpotifyBlock as SpotifyBlockProps,
   // CallToActionBlock as CTABlockProps,
   // MediaBlock as MediaBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
+import { YouTubeBlock } from '@/blocks/YouTube/Component'
+import { InstagramBlock } from '@/blocks/Instagram/Component'
+import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
 // import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { cn } from '@/utilities/ui'
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<BannerBlockProps>
+  | SerializedBlockNode<BannerBlockProps | YouTubeBlockProps | InstagramBlockProps | SpotifyBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -40,6 +46,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    youtube: ({ node }) => <YouTubeBlock {...node.fields} />,
+    instagram: ({ node }) => <InstagramBlock {...node.fields} />,
+    spotify: ({ node }) => <SpotifyBlock {...node.fields} />,
     // mediaBlock: ({ node }) => (
     //   <MediaBlock
     //     className="col-start-1 col-span-3"

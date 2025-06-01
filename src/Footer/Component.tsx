@@ -7,6 +7,7 @@ import type { Footer } from '@/payload-types'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
+import { SocialLinks } from '@/components/SocialLinks'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -29,6 +30,7 @@ export async function Footer() {
         </div>
 
         <div className="m-8 flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
+          <SocialLinks/>
           <ThemeSelector />
           <nav className="flex flex-col md:flex-row gap-4">
             {navItems.map(({ link }, i) => {
