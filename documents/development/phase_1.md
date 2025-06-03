@@ -18,32 +18,55 @@
     - Footer data needs to also be seeded with links and info
   - Sites
     - I opted not to seed this data at this time since it may be replaced with a plugin
-   
+#### 3 hours   
+
 2. Update to the latest Payload Version
    - I ran pnpm update and nothing seemed to break, did little testing, going to just continue as build is fine
+#### 1 < hour
 
 3. Implement Posts collection and seed data
    - The posts collection touches a few things, not sure I want to bring in every feature here. Is it needed for the VFW?
    - Integrated very basic frontend for posts
    - Integrated a few more components and a post hero
    - Still need to seed posts data
+#### 2 hours
+
 4. Integrate UI for Posts collection config
    - Completed a basic UI/UX experience for this
    - much more room to expand on what a post is
+#### 1 hours
+
 5. Update Header UI/UX to match VFW site
    - Pretty much done, need to add pages and search bar
    - Header is data saved in the Database
    - I used a Rich text editor for the address but I think it would be best to store the Logo and Address in a collection that can be reused in the header
    - May incorporate Logo picture into DB as well, this may be needed as logo doesn't load in some places
+#### 2 hours
+
 6. Update Footer UI/UX
     - Implemented basic UI for footer to match current website, need to determine how to handle addresses
+#### 1 hours
+
 7. Footer should include links to social media, spotify, and such
    - Created 3 new blocks that handle embedding youtube, spotify, and instagram content in the rich text lexical editor as well as on a page
    - Easily able to embed Facebook, twitter and other socials if needed
    - added links to footer, do we want to embed profiles in the footer?
+### 2 hours
+
 8. Integrate Media Block, Code Block, and Archive Block
+   - Following the flow from the prior tasks this was a trivial task
+### 1 < hour
 9. Integrate Search Bar in header
+   - Search page and component were added, was able to use some existing components
+   - Copied starter project from payload
+   - Search plugin has an import fieldOverrides.ts, use this to update the plugin fields
+### 2 hours
+
 10. Update pages collection to include desired features
+   - I don't see anything that I would need to do here yet as I haven't ran into any blockers
+   - Access and authentication will need to be integrated at some point
+### 0 hours
+
 11. Add Pages for 
    - Home
    - Calendar & Food Menu
@@ -53,6 +76,12 @@
    - Officers & Committees
    - Programs
    - Chaplains Corner
+### 1 < hour
+
+#### backlog of 60-80 hours of research and development needs to be logged
+#### this effort took roughly ~20 hours to complete if you factor in 25% overhead 
+
+#### PHASE 1 Complete 06/02/2025 ~
 
 
 
