@@ -44,7 +44,9 @@
 8. Integrate Media Block, Code Block, and Archive Block
    - Following the flow from the prior tasks this was a trivial task
 9. Integrate Search Bar in header
-10. 
+   - Search page and component were added, was able to use some existing components
+   - Copied starter project from payload
+   - Search plugin has an import fieldOverrides.ts, use this to update the plugin fields
 10. Update pages collection to include desired features
 11. Add Pages for 
    - Home
