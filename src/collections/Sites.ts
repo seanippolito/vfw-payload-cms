@@ -4,6 +4,7 @@ import { authenticated } from '@/access/authenticated'
 export const Sites: CollectionConfig = {
   slug: 'sites',
   admin: {
+    group: 'Settings',
     useAsTitle: 'title',
   },
   access: {

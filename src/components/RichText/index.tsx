@@ -1,4 +1,3 @@
-// import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -11,26 +10,29 @@ import {
   RichText as ConvertRichText,
 } from '@payloadcms/richtext-lexical/react'
 
-// import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { cn } from '@/utilities/ui'
+
+import { BannerBlock } from '@/blocks/Banner/Component'
+import { YouTubeBlock } from '@/blocks/YouTube/Component'
+import { InstagramBlock } from '@/blocks/Instagram/Component'
+import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
+import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
   YouTubeBlock as YouTubeBlockProps,
   InstagramBlock as InstagramBlockProps,
   SpotifyBlock as SpotifyBlockProps,
-  // CallToActionBlock as CTABlockProps,
-  // MediaBlock as MediaBlockProps,
+  CallToActionBlock as CTABlockProps,
+  MediaBlock as MediaBlockProps,
 } from '@/payload-types'
-import { BannerBlock } from '@/blocks/Banner/Component'
-import { YouTubeBlock } from '@/blocks/YouTube/Component'
-import { InstagramBlock } from '@/blocks/Instagram/Component'
-import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
-// import { CallToActionBlock } from '@/blocks/CallToAction/Component'
-import { cn } from '@/utilities/ui'
+
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<BannerBlockProps | YouTubeBlockProps | InstagramBlockProps | SpotifyBlockProps>
+  | SerializedBlockNode<BannerBlockProps | YouTubeBlockProps | InstagramBlockProps | SpotifyBlockProps | CTABlockProps | MediaBlockProps | CodeBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -49,18 +51,18 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     youtube: ({ node }) => <YouTubeBlock {...node.fields} />,
     instagram: ({ node }) => <InstagramBlock {...node.fields} />,
     spotify: ({ node }) => <SpotifyBlock {...node.fields} />,
-    // mediaBlock: ({ node }) => (
-    //   <MediaBlock
-    //     className="col-start-1 col-span-3"
-    //     imgClassName="m-0"
-    //     {...node.fields}
-    //     captionClassName="mx-auto max-w-3xl"
-    //     enableGutter={false}
-    //     disableInnerContainer={true}
-    //   />
-    // ),
-    // code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
-    // cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    mediaBlock: ({ node }) => (
+      <MediaBlock
+        className="col-start-1 col-span-3"
+        imgClassName="m-0"
+        {...node.fields}
+        captionClassName="mx-auto max-w-3xl"
+        enableGutter={false}
+        disableInnerContainer={true}
+      />
+    ),
+    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
+    cta: ({ node }) => <CallToActionBlock {...node.fields} />,
   },
 })
 
