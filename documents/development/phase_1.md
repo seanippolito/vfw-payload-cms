@@ -42,7 +42,9 @@
    - Easily able to embed Facebook, twitter and other socials if needed
    - added links to footer, do we want to embed profiles in the footer?
 8. Integrate Media Block, Code Block, and Archive Block
+   - Following the flow from the prior tasks this was a trivial task
 9. Integrate Search Bar in header
+10. 
 10. Update pages collection to include desired features
 11. Add Pages for 
    - Home
