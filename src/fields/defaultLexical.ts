@@ -13,6 +13,8 @@ import { Banner } from '@/blocks/Banner/config'
 import { YouTube } from '@/blocks/YouTube/config'
 import { Instagram } from '@/blocks/Instagram/config'
 import { Spotify } from '@/blocks/Spotfiy/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -20,7 +22,7 @@ export const defaultLexical = lexicalEditor({
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
-    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify] }),
+    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify, Code, MediaBlock] }),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {
