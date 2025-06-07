@@ -9,6 +9,16 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   previousDoc,
   req: { payload, context },
 }) => {
+
+  // console.log(`This is the doc we are revalidating and sending an email ${doc.slug}`)
+  // payload.email.sendEmail({
+  //   to: 'ippolitosean@gmail.com',
+  //   subject: 'This is a test email',
+  //   text: `The ${doc.slug} page has been updated! ${doc.title}`
+  // })
+  // console.log(`email sent`)
+
+
   if (!context.disableRevalidate) {
     if (doc._status === 'published') {
       const path = doc.slug === 'home' ? '/' : `/${doc.slug}`

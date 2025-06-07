@@ -1,98 +1,669 @@
-@import 'tailwindcss';
+@import 'tailwindcss'; /* prefix(tw); used only for tailwind classes separated by tw: */
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:where([data-theme=dark] *));
-@custom-variant light (&:where([data-theme=light] *));
-@custom-variant sexy (&:where([data-theme=sexy] *));
+/*@config "./tailwind.config.js";*/
 
+/* Define custom variants for themes */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
+@custom-variant vfw (&:where([data-theme=vfw], [data-theme=vfw] *));
 
 @theme {
+
+
+
+    /*!* Mobile Break points *!*/
+    --breakpoint-xs: 360px;
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 720px;
+    --breakpoint-lg: 960px;
+    --breakpoint-xl: 1480px;
+    --breakpoint-2xl: 1960px;
+    --breakpoint-3xl: 2100rem;
+
+    --step-0: z-0;
+    --step-10: z-10;
+    --step-20: z-20;
+    --step-30: z-30;
+    --step-40: z-40;
+    --step-50: z-50;
+
+    /*!* Border radius *!*/
     --font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);
     --font-mono: var(--font-geist-mono, 'Courier New', monospace);
 
-    --font-script: Great Vibes, cursive;
+    --border-radius-lg: calc(var(--radius, 0.5rem));
+    --border-radius-md: calc(var(--radius, 0.5rem) - 2px);
+    --border-radius-sm: calc(var(--radius, 0.5rem) - 4px);
 
-    --color-foreground: var(--theme-color-foreground);
-    --color-background: var(--theme-color-background);
-    --color-sexy-red: var(--theme-color-sexy-red);
+    /* Variables */
+    --theme-bg: var(--theme-elevation-0);
+    --theme-input-bg: var(--theme-elevation-0);
+    --theme-text: var(--theme-elevation-800);
+    --theme-overlay: rgba(5, 5, 5, 0.5);
+    --font-body: 'Suisse Intl', system-ui;
+    --style-radius-s: 4px;
+    --style-radius-m: 8px;
+    --style-radius-l: 16px;
+    --nav-width: 275px;
 
-    --color-card: 240 5% 96%;
-    --color-card-foreground: 222.2 84% 4.9%;
+    /* Base Colors */
+    --color-base-0: var(--color-base-0);
+    --color-base-50: var(--color-base-50);
+    --color-base-100: var(--color-base-100);
+    --color-base-150: var(--color-base-150);
+    --color-base-200: var(--color-base-200);
+    --color-base-250: var(--color-base-250);
+    --color-base-300: var(--color-base-300);
+    --color-base-350: var(--color-base-350);
+    --color-base-400: var(--color-base-400);
+    --color-base-450: var(--color-base-450);
+    --color-base-500: var(--color-base-500);
+    --color-base-550: var(--color-base-550);
+    --color-base-600: var(--color-base-600);
+    --color-base-650: var(--color-base-650);
+    --color-base-700: var(--color-base-700);
+    --color-base-750: var(--color-base-750);
+    --color-base-800: var(--color-base-800);
+    --color-base-850: var(--color-base-850);
+    --color-base-900: var(--color-base-900);
+    --color-base-950: var(--color-base-950);
+    --color-base-1000: var(--color-base-1000);
 
-    --color-popover: 0 0% 100%;
-    --color-popover-foreground: 222.2 84% 4.9%;
+    /* Success Colors */
+    --color-success-0: var(--color-success-0);
+    --color-success-50: var(--color-success-50);
+    --color-success-100: var(--color-success-100);
+    --color-success-150: var(--color-success-150);
+    --color-success-200: var(--color-success-200);
+    --color-success-250: var(--color-success-250);
+    --color-success-300: var(--color-success-300);
+    --color-success-350: var(--color-success-350);
+    --color-success-400: var(--color-success-400);
+    --color-success-450: var(--color-success-450);
+    --color-success-500: var(--color-success-500);
+    --color-success-550: var(--color-success-550);
+    --color-success-600: var(--color-success-600);
+    --color-success-650: var(--color-success-650);
+    --color-success-700: var(--color-success-700);
+    --color-success-750: var(--color-success-750);
+    --color-success-800: var(--color-success-800);
+    --color-success-850: var(--color-success-850);
+    --color-success-900: var(--color-success-900);
+    --color-success-950: var(--color-success-950);
+    --color-success-1000: var(--color-success-1000);
 
-    --color-primary: 222.2 47.4% 11.2%;
-    --color-primary-foreground: 210 40% 98%;
+    /* Warning Colors */
+    --color-warning-0: var(--color-warning-0);
+    --color-warning-50: var(--color-warning-50);
+    --color-warning-100: var(--color-warning-100);
+    --color-warning-150: var(--color-warning-150);
+    --color-warning-200: var(--color-warning-200);
+    --color-warning-250: var(--color-warning-250);
+    --color-warning-300: var(--color-warning-300);
+    --color-warning-350: var(--color-warning-350);
+    --color-warning-400: var(--color-warning-400);
+    --color-warning-450: var(--color-warning-450);
+    --color-warning-500: var(--color-warning-500);
+    --color-warning-550: var(--color-warning-550);
+    --color-warning-600: var(--color-warning-600);
+    --color-warning-650: var(--color-warning-650);
+    --color-warning-700: var(--color-warning-700);
+    --color-warning-750: var(--color-warning-750);
+    --color-warning-800: var(--color-warning-800);
+    --color-warning-850: var(--color-warning-850);
+    --color-warning-900: var(--color-warning-900);
+    --color-warning-950: var(--color-warning-950);
+    --color-warning-1000: var(--color-warning-1000);
 
-    --color-secondary: 210 40% 96.1%;
-    --color-secondary-foreground: 222.2 47.4% 11.2%;
+    /* Error Colors */
+    --color-error-0: var(--color-error-0);
+    --color-error-50: var(--color-error-50);
+    --color-error-100: var(--color-error-100);
+    --color-error-150: var(--color-error-150);
+    --color-error-200: var(--color-error-200);
+    --color-error-250: var(--color-error-250);
+    --color-error-300: var(--color-error-300);
+    --color-error-350: var(--color-error-350);
+    --color-error-400: var(--color-error-400);
+    --color-error-450: var(--color-error-450);
+    --color-error-500: var(--color-error-500);
+    --color-error-550: var(--color-error-550);
+    --color-error-600: var(--color-error-600);
+    --color-error-650: var(--color-error-650);
+    --color-error-700: var(--color-error-700);
+    --color-error-750: var(--color-error-750);
+    --color-error-800: var(--color-error-800);
+    --color-error-850: var(--color-error-850);
+    --color-error-900: var(--color-error-900);
+    --color-error-950: var(--color-error-950);
+    --color-error-1000: var(--color-error-1000);
 
-    --color-muted: 210 40% 96.1%;
-    --color-muted-foreground: 215.4 16.3% 46.9%;
-
-    --color-accent: 210 40% 96.1%;
-    --color-accent-foreground: 222.2 47.4% 11.2%;
-
-    --color-destructive: 0 84.2% 60.2%;
-    --color-destructive-foreground: 210 40% 98%;
-
-    --color-border: 240 6% 80%;
-    --color-input: 214.3 31.8% 91.4%;
-    --color-ring: 222.2 84% 4.9%;
-
-    --border-radius-lg: 0.2rem;
-    --border-radius-md: 0.2rem - 2px;
-    --border-radius-sm: 0.2rem - 4px;
-
-
-    --color-success: 196 52% 74%;
-    --color-warning: 34 89% 85%;
-    --color-error: 10 100% 86%;
+    /* Accent Colors */
+    --color-accent-0: var(--color-accent-0);
+    --color-accent-50: var(--color-accent-50);
+    --color-accent-100: var(--color-accent-100);
+    --color-accent-150: var(--color-accent-150);
+    --color-accent-200: var(--color-accent-200);
+    --color-accent-250: var(--color-accent-250);
+    --color-accent-300: var(--color-accent-300);
+    --color-accent-350: var(--color-accent-350);
+    --color-accent-400: var(--color-accent-400);
+    --color-accent-450: var(--color-accent-450);
+    --color-accent-500: var(--color-accent-500);
+    --color-accent-550: var(--color-accent-550);
+    --color-accent-600: var(--color-accent-600);
+    --color-accent-650: var(--color-accent-650);
+    --color-accent-700: var(--color-accent-700);
+    --color-accent-750: var(--color-accent-750);
+    --color-accent-800: var(--color-accent-800);
+    --color-accent-850: var(--color-accent-850);
+    --color-accent-900: var(--color-accent-900);
+    --color-accent-950: var(--color-accent-950);
+    --color-accent-1000: var(--color-accent-1000);
 }
 
+
+/* Root variables for better defaults and fallback values */
+:root {
+    /* Default font definitions */
+    /*--font-sans: var(--font-geist-sans, Arial, Helvetica, sans-serif);*/
+    /*--font-mono: var(--font-geist-mono, 'Courier New', monospace);*/
+
+    /* Default colors (fallbacks for when a theme is not set) */
+    /*--color-accent: hsl(var(--accent, 200, 15%, 25%));*/
+    /*--color-accent-foreground: hsl(var(--accent-foreground, 0, 0%, 100%));*/
+    /*--color-foreground: hsl(var(--foreground, 0, 0%, 87%));*/
+    /*--color-background: hsl(var(--background, 0, 0%, 10%));*/
+    /*--color-muted: hsl(var(--muted, 220, 10%, 40%));*/
+    /*--color-muted-foreground: hsl(var(--muted-foreground, 0, 0%, 100%));*/
+    /*--color-input: hsl(var(--input, 220, 10%, 25%));*/
+    /*--color-card: hsl(var(--card, 0, 0%, 18%));*/
+    /*--color-card-foreground: hsl(var(--card-foreground, 0, 0%, 100%));*/
+    /*--color-primary: hsl(var(--primary, 240, 100%, 60%));*/
+    /*--color-primary-foreground: hsl(var(--primary-foreground, 0, 0%, 100%));*/
+    /*--color-secondary: hsl(var(--secondary, 200, 60%, 45%));*/
+    /*--color-secondary-foreground: hsl(var(--secondary-foreground, 0, 0%, 100%));*/
+    /*--color-ring: hsl(var(--ring, 220, 100%, 60%));*/
+    /*--color-success: hsl(var(--success, 145, 60%, 45%));*/
+    /*--color-warning: hsl(var(--warning, 45, 85%, 55%));*/
+    /*--color-error: hsl(var(--error, 0, 60%, 50%));*/
+
+    /* Color Shades */
+    /*--color-base-0: #ffffff;*/
+    /*--color-base-50: #eef1f8;*/
+    /*--color-base-100: #dce4f1;*/
+    /*--color-base-150: #cbd6e9;*/
+    /*--color-base-200: #bac9e2;*/
+    /*--color-base-250: #a8bbdb;*/
+    /*--color-base-300: #97add4;*/
+    /*--color-base-350: #86a0cc;*/
+    /*--color-base-400: #7592c5;*/
+    /*--color-base-450: #6385be;*/
+    /*--color-base-500: #043891;*/
+    /*--color-base-550: #043486;*/
+    /*--color-base-600: #03307c;*/
+    /*--color-base-650: #032c72;*/
+    /*--color-base-700: #032867;*/
+    /*--color-base-750: #02245d;*/
+    /*--color-base-800: #022053;*/
+    /*--color-base-850: #021c48;*/
+    /*--color-base-900: #02183e;*/
+    /*--color-base-950: #011434;*/
+    /*--color-success-0: #ffffff;*/
+    /*--color-success-50: #f1faf6;*/
+    /*--color-success-100: #e3f5ed;*/
+    /*--color-success-150: #d5efe4;*/
+    /*--color-success-200: #c8eadb;*/
+    /*--color-success-250: #bae5d3;*/
+    /*--color-success-300: #ace0ca;*/
+    /*--color-success-350: #9edac1;*/
+    /*--color-success-400: #90d5b8;*/
+    /*--color-success-450: #82d0af;*/
+    /*--color-success-500: #34ad7a;*/
+    /*--color-success-550: #30a071;*/
+    /*--color-success-600: #2d9468;*/
+    /*--color-success-650: #298860;*/
+    /*--color-success-700: #257b57;*/
+    /*--color-success-750: #226f4e;*/
+    /*--color-success-800: #1e6346;*/
+    /*--color-success-850: #1a563d;*/
+    /*--color-success-900: #164a34;*/
+    /*--color-success-950: #133e2b;*/
+    /*--color-warning-0: #ffffff;*/
+    /*--color-warning-50: #fff9ed;*/
+    /*--color-warning-100: #fff3dc;*/
+    /*--color-warning-150: #ffeeca;*/
+    /*--color-warning-200: #ffe8b9;*/
+    /*--color-warning-250: #ffe2a7;*/
+    /*--color-warning-300: #ffdc95;*/
+    /*--color-warning-350: #ffd684;*/
+    /*--color-warning-400: #ffd172;*/
+    /*--color-warning-450: #ffcb61;*/
+    /*--color-warning-500: #f6a500;*/
+    /*--color-warning-550: #e59900;*/
+    /*--color-warning-600: #d38e00;*/
+    /*--color-warning-650: #c18200;*/
+    /*--color-warning-700: #b07600;*/
+    /*--color-warning-750: #9e6a00;*/
+    /*--color-warning-800: #8d5e00;*/
+    /*--color-warning-850: #7b5300;*/
+    /*--color-warning-900: #6a4700;*/
+    /*--color-warning-950: #583b00;*/
+    /*--color-error-0: #ffffff;*/
+    /*--color-error-50: #fff3f1;*/
+    /*--color-error-100: #ffe8e2;*/
+    /*--color-error-150: #ffdcd4;*/
+    /*--color-error-200: #ffd0c6;*/
+    /*--color-error-250: #ffc5b8;*/
+    /*--color-error-300: #ffb9a9;*/
+    /*--color-error-350: #ffad9b;*/
+    /*--color-error-400: #ffa28d;*/
+    /*--color-error-450: #ff967f;*/
+    /*--color-error-500: #f6532e;*/
+    /*--color-error-550: #e54d2b;*/
+    /*--color-error-600: #d34728;*/
+    /*--color-error-650: #c14124;*/
+    /*--color-error-700: #b03b21;*/
+    /*--color-error-750: #9e351e;*/
+    /*--color-error-800: #8d2f1a;*/
+    /*--color-error-850: #7b2a17;*/
+    /*--color-error-900: #6a2414;*/
+    /*--color-error-950: #581e11;*/
+    /*--color-accent-0: #ffffff;*/
+    /*--color-accent-50: #fbedef;*/
+    /*--color-accent-100: #f8dcdf;*/
+    /*--color-accent-150: #f4cacf;*/
+    /*--color-accent-200: #f1b9be;*/
+    /*--color-accent-250: #eda7ae;*/
+    /*--color-accent-300: #ea959e;*/
+    /*--color-accent-350: #e6848e;*/
+    /*--color-accent-400: #e3727e;*/
+    /*--color-accent-450: #df616e;*/
+    /*--color-accent-500: #c50014;*/
+    /*--color-accent-550: #b70013;*/
+    /*--color-accent-600: #a90011;*/
+    /*--color-accent-650: #9b0010;*/
+    /*--color-accent-700: #8d000e;*/
+    /*--color-accent-750: #7f000d;*/
+    /*--color-accent-800: #71000c;*/
+    /*--color-accent-850: #62000a;*/
+    /*--color-accent-900: #540009;*/
+    /*--color-accent-950: #460007;*/
+    /*--color-accent-1000: #0e0002;*/
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+    /* Color Shades */
+    --color-base-0: #ffffff;
+    --color-base-50: #eef1f8;
+    --color-base-100: #dce4f1;
+    --color-base-150: #cbd6e9;
+    --color-base-200: #bac9e2;
+    --color-base-250: #a8bbdb;
+    --color-base-300: #97add4;
+    --color-base-350: #86a0cc;
+    --color-base-400: #7592c5;
+    --color-base-450: #6385be;
+    --color-base-500: #043891;
+    --color-base-550: #043486;
+    --color-base-600: #03307c;
+    --color-base-650: #032c72;
+    --color-base-700: #032867;
+    --color-base-750: #02245d;
+    --color-base-800: #022053;
+    --color-base-850: #021c48;
+    --color-base-900: #02183e;
+    --color-base-950: #011434;
+    --color-success-0: #ffffff;
+    --color-success-50: #f1faf6;
+    --color-success-100: #e3f5ed;
+    --color-success-150: #d5efe4;
+    --color-success-200: #c8eadb;
+    --color-success-250: #bae5d3;
+    --color-success-300: #ace0ca;
+    --color-success-350: #9edac1;
+    --color-success-400: #90d5b8;
+    --color-success-450: #82d0af;
+    --color-success-500: #34ad7a;
+    --color-success-550: #30a071;
+    --color-success-600: #2d9468;
+    --color-success-650: #298860;
+    --color-success-700: #257b57;
+    --color-success-750: #226f4e;
+    --color-success-800: #1e6346;
+    --color-success-850: #1a563d;
+    --color-success-900: #164a34;
+    --color-success-950: #133e2b;
+    --color-warning-0: #ffffff;
+    --color-warning-50: #fff9ed;
+    --color-warning-100: #fff3dc;
+    --color-warning-150: #ffeeca;
+    --color-warning-200: #ffe8b9;
+    --color-warning-250: #ffe2a7;
+    --color-warning-300: #ffdc95;
+    --color-warning-350: #ffd684;
+    --color-warning-400: #ffd172;
+    --color-warning-450: #ffcb61;
+    --color-warning-500: #f6a500;
+    --color-warning-550: #e59900;
+    --color-warning-600: #d38e00;
+    --color-warning-650: #c18200;
+    --color-warning-700: #b07600;
+    --color-warning-750: #9e6a00;
+    --color-warning-800: #8d5e00;
+    --color-warning-850: #7b5300;
+    --color-warning-900: #6a4700;
+    --color-warning-950: #583b00;
+    --color-error-0: #ffffff;
+    --color-error-50: #fff3f1;
+    --color-error-100: #ffe8e2;
+    --color-error-150: #ffdcd4;
+    --color-error-200: #ffd0c6;
+    --color-error-250: #ffc5b8;
+    --color-error-300: #ffb9a9;
+    --color-error-350: #ffad9b;
+    --color-error-400: #ffa28d;
+    --color-error-450: #ff967f;
+    --color-error-500: #f6532e;
+    --color-error-550: #e54d2b;
+    --color-error-600: #d34728;
+    --color-error-650: #c14124;
+    --color-error-700: #b03b21;
+    --color-error-750: #9e351e;
+    --color-error-800: #8d2f1a;
+    --color-error-850: #7b2a17;
+    --color-error-900: #6a2414;
+    --color-error-950: #581e11;
+    --color-accent-0: #ffffff;
+    --color-accent-50: #fbedef;
+    --color-accent-100: #f8dcdf;
+    --color-accent-150: #f4cacf;
+    --color-accent-200: #f1b9be;
+    --color-accent-250: #eda7ae;
+    --color-accent-300: #ea959e;
+    --color-accent-350: #e6848e;
+    --color-accent-400: #e3727e;
+    --color-accent-450: #df616e;
+    --color-accent-500: #c50014;
+    --color-accent-550: #b70013;
+    --color-accent-600: #a90011;
+    --color-accent-650: #9b0010;
+    --color-accent-700: #8d000e;
+    --color-accent-750: #7f000d;
+    --color-accent-800: #71000c;
+    --color-accent-850: #62000a;
+    --color-accent-900: #540009;
+    --color-accent-950: #460007;
+    --color-accent-1000: #0e0002;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+    /* Dark Theme Colors */
+    --color-base-0: #000000;
+    --color-base-50: #011434;
+    --color-base-100: #02183e;
+    --color-base-150: #021c48;
+    --color-base-200: #022053;
+    --color-base-250: #02245d;
+    --color-base-300: #032867;
+    --color-base-350: #032c72;
+    --color-base-400: #03307c;
+    --color-base-450: #043486;
+    --color-base-500: #043891;
+    --color-base-550: #6385be;
+    --color-base-600: #7592c5;
+    --color-base-650: #86a0cc;
+    --color-base-700: #97add4;
+    --color-base-750: #a8bbdb;
+    --color-base-800: #bac9e2;
+    --color-base-850: #cbd6e9;
+    --color-base-900: #dce4f1;
+    --color-base-950: #eef1f8;
+
+    --color-success-0: #000000;
+    --color-success-50: #133e2b;
+    --color-success-100: #164a34;
+    --color-success-150: #1a563d;
+    --color-success-200: #1e6346;
+    --color-success-250: #226f4e;
+    --color-success-300: #257b57;
+    --color-success-350: #298860;
+    --color-success-400: #2d9468;
+    --color-success-450: #30a071;
+    --color-success-500: #34ad7a;
+    --color-success-550: #82d0af;
+    --color-success-600: #90d5b8;
+    --color-success-650: #9edac1;
+    --color-success-700: #ace0ca;
+    --color-success-750: #bae5d3;
+    --color-success-800: #c8eadb;
+    --color-success-850: #d5efe4;
+    --color-success-900: #e3f5ed;
+    --color-success-950: #f1faf6;
+
+    --color-warning-0: #000000;
+    --color-warning-50: #583b00;
+    --color-warning-100: #6a4700;
+    --color-warning-150: #7b5300;
+    --color-warning-200: #8d5e00;
+    --color-warning-250: #9e6a00;
+    --color-warning-300: #b07600;
+    --color-warning-350: #c18200;
+    --color-warning-400: #d38e00;
+    --color-warning-450: #e59900;
+    --color-warning-500: #f6a500;
+    --color-warning-550: #ffcb61;
+    --color-warning-600: #ffd172;
+    --color-warning-650: #ffd684;
+    --color-warning-700: #ffdc95;
+    --color-warning-750: #ffe2a7;
+    --color-warning-800: #ffe8b9;
+    --color-warning-850: #ffeeca;
+    --color-warning-900: #fff3dc;
+    --color-warning-950: #fff9ed;
+
+    --color-error-0: #000000;
+    --color-error-50: #581e11;
+    --color-error-100: #6a2414;
+    --color-error-150: #7b2a17;
+    --color-error-200: #8d2f1a;
+    --color-error-250: #9e351e;
+    --color-error-300: #b03b21;
+    --color-error-350: #c14124;
+    --color-error-400: #d34728;
+    --color-error-450: #e54d2b;
+    --color-error-500: #f6532e;
+    --color-error-550: #ff967f;
+    --color-error-600: #ffa28d;
+    --color-error-650: #ffad9b;
+    --color-error-700: #ffb9a9;
+    --color-error-750: #ffc5b8;
+    --color-error-800: #ffd0c6;
+    --color-error-850: #ffdcd4;
+    --color-error-900: #ffe8e2;
+    --color-error-950: #fff3f1;
+
+    --color-accent-0: #000000;
+    --color-accent-50: #460007;
+    --color-accent-100: #540009;
+    --color-accent-150: #62000a;
+    --color-accent-200: #71000c;
+    --color-accent-250: #7f000d;
+    --color-accent-300: #8d000e;
+    --color-accent-350: #9b0010;
+    --color-accent-400: #a90011;
+    --color-accent-450: #b70013;
+    --color-accent-500: #c50014;
+    --color-accent-550: #df616e;
+    --color-accent-600: #e3727e;
+    --color-accent-650: #e6848e;
+    --color-accent-700: #ea959e;
+    --color-accent-750: #eda7ae;
+    --color-accent-800: #f1b9be;
+    --color-accent-850: #f4cacf;
+    --color-accent-900: #f8dcdf;
+    --color-accent-950: #fbedef;
+    --color-accent-1000: #ffffff;
+}
+
+[data-theme="vfw"] {
+    /* Base Colors - Vibrant Blues and Purples for Depth */
+    --color-base-0: #0a0a19;
+    --color-base-50: #0d1028;
+    --color-base-100: #12163c;
+    --color-base-150: #1a2051;
+    --color-base-200: #1f2968;
+    --color-base-250: #293580;
+    --color-base-300: #354099;
+    --color-base-350: #4554b3;
+    --color-base-400: #5d6ecc;
+    --color-base-450: #7688e0;
+    --color-base-500: #91a1f5;
+    --color-base-550: #abb8fa;
+    --color-base-600: #c3ccfc;
+    --color-base-650: #d9dffc;
+    --color-base-700: #ecefff;
+    --color-base-750: #f3f5ff;
+    --color-base-800: #f8f9ff;
+    --color-base-850: #fafbff;
+    --color-base-900: #fdfdff;
+    --color-base-950: #ffffff;
+    --color-base-1000: #ffffff;
+
+    /* Success Colors - Bright Greens for Positive Actions */
+    --color-success-0: #09140a;
+    --color-success-50: #0c2310;
+    --color-success-100: #133f1d;
+    --color-success-150: #1a5c2b;
+    --color-success-200: #22783a;
+    --color-success-250: #2c9950;
+    --color-success-300: #37b966;
+    --color-success-350: #45d47e;
+    --color-success-400: #5af499;
+    --color-success-450: #7cffa8;
+    --color-success-500: #99ffb8;
+    --color-success-550: #b3ffbf;
+    --color-success-600: #ccffcf;
+    --color-success-650: #e3ffdc;
+    --color-success-700: #f1ffe8;
+    --color-success-750: #f8ffef;
+    --color-success-800: #fcfff4;
+    --color-success-850: #fefff7;
+    --color-success-900: #fdfff9;
+    --color-success-950: #fffffc;
+    --color-success-1000: #ffffff;
+
+    /* Warning Colors - Lively Oranges and Yellows */
+    --color-warning-0: #1a0f00;
+    --color-warning-50: #301a00;
+    --color-warning-100: #4f2e00;
+    --color-warning-150: #6e3f00;
+    --color-warning-200: #8d5300;
+    --color-warning-250: #b06a00;
+    --color-warning-300: #d08400;
+    --color-warning-350: #ec9c12;
+    --color-warning-400: #f6b54b;
+    --color-warning-450: #fdcb71;
+    --color-warning-500: #ffd88a;
+    --color-warning-550: #ffe09c;
+    --color-warning-600: #ffe7ae;
+    --color-warning-650: #ffebc1;
+    --color-warning-700: #ffefd4;
+    --color-warning-750: #fff5e1;
+    --color-warning-800: #fff8ec;
+    --color-warning-850: #fffaf3;
+    --color-warning-900: #fffdf8;
+    --color-warning-950: #fffefd;
+    --color-warning-1000: #ffffff;
+
+    /* Error Colors - Playful Reds for Errors */
+    --color-error-0: #190909;
+    --color-error-50: #2e1414;
+    --color-error-100: #4b1e1e;
+    --color-error-150: #6a2a2a;
+    --color-error-200: #883636;
+    --color-error-250: #b04545;
+    --color-error-300: #d85555;
+    --color-error-350: #f96a6a;
+    --color-error-400: #ff7e7e;
+    --color-error-450: #ff9494;
+    --color-error-500: #ffa4a4;
+    --color-error-550: #ffb5b5;
+    --color-error-600: #ffc7c7;
+    --color-error-650: #ffd8d8;
+    --color-error-700: #ffe7e7;
+    --color-error-750: #ffefef;
+    --color-error-800: #fff5f5;
+    --color-error-850: #fffafb;
+    --color-error-900: #fffcfc;
+    --color-error-950: #ffffff;
+    --color-error-1000: #ffffff;
+
+    /* Accent Colors - Fun Neons and Brights */
+    --color-accent-0: #140033;
+    --color-accent-50: #22005e;
+    --color-accent-100: #35008d;
+    --color-accent-150: #4c16a5;
+    --color-accent-200: #662ab5;
+    --color-accent-250: #823fc7;
+    --color-accent-300: #994ddb;
+    --color-accent-350: #af62ee;
+    --color-accent-400: #c879fc;
+    --color-accent-450: #da95fc;
+    --color-accent-500: #e6adfd;
+    --color-accent-550: #f0c4fd;
+    --color-accent-600: #f7d7fe;
+    --color-accent-650: #fadffb;
+    --color-accent-700: #fce9ff;
+    --color-accent-750: #fef2ff;
+    --color-accent-800: #fef5ff;
+    --color-accent-850: #fff9ff;
+    --color-accent-900: #fffefe;
+    --color-accent-950: #ffffff;
+    --color-accent-1000: #ffffff;
+}
+
+/* Typography and base styles */
 @layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
+    * {
+        border-color: var(--color-accent-750);
     }
 
-    [data-theme="light"] {
-
-        --theme-color-foreground: oklch(0.892 0.054 82.855);
-        --theme-color-background: oklch(0.563 0.223 28.51);
-        --theme-color-sexy-red: oklch(0.391 0.041 100.549);
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--color-base-250);
+        color: var(--color-base-750);
     }
 
-    [data-theme="dark"] {
-        --theme-color-foreground: oklch(0.255 0.104 29.234);
-        --theme-color-background: oklch(0.75 0.237 139.9);
-        --theme-color-sexy-red: oklch(0.646 0.145 240.785);
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-sans);
+        color: var(--color-base-850);
     }
 
-    [data-theme="sexy"] {
-        --theme-color-foreground: oklch(0.475 0.175 259.558);
-        --theme-color-background: oklch(0.527 0.231 330.507);
-        --theme-color-sexy-red: oklch(0.801 0.233 135.997);
+    button {
+        background-color: var(--color-accent-350);
+        color: var(--color-accent-750);
+        border-radius: var(--style-radius-l);
+        padding: 0.5rem 1rem;
+        font-weight: bold;
     }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+/* Styling for typography plugin */
+.prose {
+    color: var(--color-base-750);
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+.prose h1 {
+    color: var(--color-base-550);
+    font-weight: 700;
+}
 
-body {
-    color: var(--color-foreground);
-    background: var(--color-background);
-    /*font-family: var(--font-script);*/
-    /*font-family: Arial, Helvetica, sans-serif;*/
+.prose h2 {
+    color: var(--color-base-450);
+    font-weight: 600;
 }

@@ -15,6 +15,7 @@ import { Instagram } from '@/blocks/Instagram/config'
 import { Spotify } from '@/blocks/Spotfiy/config'
 import { Code } from '@/blocks/Code/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { GoogleCalendar } from '@/blocks/GoogleCalendar/config'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -22,7 +23,7 @@ export const defaultLexical = lexicalEditor({
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
-    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify, Code, MediaBlock] }),
+    BlocksFeature({ blocks: [Banner, YouTube, Instagram, Spotify, Code, MediaBlock, GoogleCalendar] }),
     LinkFeature({
       enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {

@@ -10,6 +10,7 @@ import { YouTubeBlock } from '@/blocks/YouTube/Component'
 import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
 // import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { GoogleCalendarBlock } from '@/blocks/GoogleCalendar/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -19,6 +20,7 @@ const blockComponents = {
   youtube: YouTubeBlock,
   spotify: SpotifyBlock,
   mediaBlock: MediaBlock,
+  googleCalendar: GoogleCalendarBlock,
 }
 
 export const RenderBlocks: React.FC<{

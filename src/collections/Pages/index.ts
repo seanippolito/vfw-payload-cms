@@ -9,6 +9,7 @@ import { Content } from '@/blocks/Content/config'
 import { Instagram } from '@/blocks/Instagram/config'
 import { YouTube } from '@/blocks/YouTube/config'
 import { Spotify } from '@/blocks/Spotfiy/config'
+import { GoogleCalendar } from '@/blocks/GoogleCalendar/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
@@ -87,7 +88,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, Instagram, YouTube, Spotify, Archive, MediaBlock],
+              blocks: [CallToAction, Content, Instagram, YouTube, Spotify, Archive, MediaBlock, GoogleCalendar],
               required: true,
               admin: {
                 initCollapsed: true,

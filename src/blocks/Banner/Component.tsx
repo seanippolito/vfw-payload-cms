@@ -10,13 +10,14 @@ type Props = {
 
 export const BannerBlock: React.FC<Props> = ({ className, content, style }) => {
   return (
-    <div className={cn('mx-auto my-8 w-full', className)}>
+    // TODO: These themes are not be reconigzed since I am not using the config file
+    <div className={cn('mx-auto my-2 p-4 w-full', className)}>
       <div
-        className={cn('border py-3 px-6 flex items-center rounded', {
-          'border-border bg-card': style === 'info',
-          'border-error bg-error/30': style === 'error',
-          'border-success bg-success/30': style === 'success',
-          'border-warning bg-warning/30': style === 'warning',
+        className={cn('border py-1 px-6 flex items-center rounded', {
+          'border-base-750 bg-base-400': style === 'info',
+          'border-error-750 bg-error-300': style === 'error',
+          'border-success-750 bg-success-300': style === 'success',
+          'border-warning-750 bg-warning-300': style === 'warning',
         })}
       >
         <RichText data={content} enableGutter={false} enableProse={false} />
