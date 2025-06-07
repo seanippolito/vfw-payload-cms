@@ -136,6 +136,12 @@
 
 ### Phase 6 development
 
+1. Deploy to Vercel for link to share
+2. Migration scripts, what needs to be done here?
+3. Email Provider `Resend`?
+4. Image/Video storage provider S3 Cloudflare
+5. Document storage and upload feature
+
 1. Implement login/logout feature for general user
 2. Implement RBAC/ABAC
 

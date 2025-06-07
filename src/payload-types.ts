@@ -200,6 +200,7 @@ export interface Page {
     | SpotifyBlock
     | ArchiveBlock
     | MediaBlock
+    | GoogleCalendarBlock
   )[];
   meta?: {
     title?: string | null;
@@ -557,6 +558,16 @@ export interface MediaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GoogleCalendarBlock".
+ */
+export interface GoogleCalendarBlock {
+  permalink?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'googleCalendar';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1018,6 +1029,7 @@ export interface PagesSelect<T extends boolean = true> {
         spotify?: T | SpotifyBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
+        googleCalendar?: T | GoogleCalendarBlockSelect<T>;
       };
   meta?:
     | T
@@ -1129,6 +1141,15 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GoogleCalendarBlock_select".
+ */
+export interface GoogleCalendarBlockSelect<T extends boolean = true> {
+  permalink?: T;
   id?: T;
   blockName?: T;
 }

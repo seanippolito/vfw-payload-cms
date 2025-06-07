@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 import sharp from 'sharp'
 import path from 'path'
@@ -77,6 +78,12 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+  }),
+  email: resendAdapter({
+    // TODO Need to reach out to Gabe for some more info on configuring this
+    defaultFromAddress: 'vfw5985@gmail.com',
+    defaultFromName: 'VFW PB Post 5985',
+    apiKey: process.env.RESEND_API_KEY || '',
   }),
   collections: [Pages, Posts, Users, Media, Sites],
   cors: [getServerSideURL()].filter(Boolean),

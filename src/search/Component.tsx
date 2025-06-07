@@ -16,7 +16,7 @@ export const Search: React.FC = () => {
   }, [debouncedValue, router])
 
   return (
-    <div>
+    <div className="items-center">
       <form
         onSubmit={(e) => {
           e.preventDefault()

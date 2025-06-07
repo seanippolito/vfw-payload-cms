@@ -19,6 +19,7 @@ import { SpotifyBlock } from '@/blocks/Spotfiy/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { GoogleCalendarBlock } from '@/blocks/GoogleCalendar/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
@@ -27,12 +28,14 @@ import type {
   SpotifyBlock as SpotifyBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
+  GoogleCalendarBlock as GoogleCalendarBlockProps,
 } from '@/payload-types'
 
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<BannerBlockProps | YouTubeBlockProps | InstagramBlockProps | SpotifyBlockProps | CTABlockProps | MediaBlockProps | CodeBlockProps>
+  | SerializedBlockNode<BannerBlockProps | YouTubeBlockProps | InstagramBlockProps
+  | SpotifyBlockProps | CTABlockProps | MediaBlockProps | CodeBlockProps | GoogleCalendarBlockProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -51,6 +54,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     youtube: ({ node }) => <YouTubeBlock {...node.fields} />,
     instagram: ({ node }) => <InstagramBlock {...node.fields} />,
     spotify: ({ node }) => <SpotifyBlock {...node.fields} />,
+    googleCalendar: ({ node }) => <GoogleCalendarBlock {...node.fields} />,
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-start-1 col-span-3"
