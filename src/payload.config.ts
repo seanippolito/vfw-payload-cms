@@ -73,6 +73,8 @@ export default buildConfig({
       ],
     },
   },
+  defaultDepth: 2,
+  maxDepth: 3,
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
@@ -86,7 +88,8 @@ export default buildConfig({
     apiKey: process.env.RESEND_API_KEY || '',
   }),
   collections: [Pages, Posts, Users, Media, Sites],
-  cors: [getServerSideURL()].filter(Boolean),
+  cors: ['http://localhost:3000', getServerSideURL()].filter(Boolean),
+  csrf: ['http://localhost:3000', getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
     ...plugins,

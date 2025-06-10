@@ -137,9 +137,24 @@
 ### Phase 6 development
 
 1. Deploy to Vercel for link to share
+   - Done, there was quite a bit of configuration needed for this
+
+   - I integrated a new supabase database through the vercel platform
 2. Migration scripts, what needs to be done here?
+   - I ran migration scripts and committed them
+   - There is a feature that turns on/off 
+   - The process for migrating to local dev env
+     1. Make changes to payload.config.ts (add a field/plugin etc)
+     2. run `payload migrate:create` to create the migration scripts
+     3. Commit and push changes to backend repo
+     4. run `pnpm build` on server
+     5. run `pnpm payload migrate` on server to apply migrations
+     6. run `pnpm serve` or whatever is the equivalent to serve the site
 3. Email Provider `Resend`?
+   - I set up resend as an email provider but it isn't fully configured
+   - Need to get a valid email host account, setup on vfw gmail account
 4. Image/Video storage provider S3 Cloudflare
+   - Working on this now, going to use cloudflare aws 
 5. Document storage and upload feature
 
 1. Implement login/logout feature for general user
